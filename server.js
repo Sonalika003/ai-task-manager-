@@ -17,7 +17,7 @@ app.use("/tasks", taskRoutes);
 // Deployment Logic
 if (process.env.NODE_ENV === "production" || true) {
   app.use(express.static(path.join(__dirname, "frontend/dist")));
-  app.get("(.*)", (req, res) => {
+  app.get("/:path*", (req, res) => {
     // Only serve index.html for non-API routes
     if (!req.path.startsWith("/tasks")) {
       res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
